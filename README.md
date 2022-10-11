@@ -1,7 +1,8 @@
-# (TITLE)
+# Dino Island
 
 ## Authored by: 
-Quin Asselin, (YEAR)
+Quin Asselin & Peter Philavanh
+October, 2022
 
 ***
 
