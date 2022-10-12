@@ -2,13 +2,13 @@
 function getDinos() {
   let promise = new Promise(function(resolve, reject) {
     let xhr = new XMLHttpRequest();
-    let url = 'https://dinoipsum.com/api/?format=html&words=10&paragraphs=3';
+    let url = 'https://dinoipsum.com/api/?format=html&paragraphs=3&words=15';
     xhr.onload = function() {
-      let apiResponse = JSON.parse(this.response);
+      let apiResponse = this.response;
       if (this.status === 200) {
         resolve(apiResponse);
       } else {
-        reject(['Where did all the dinosaurs go?', this.status]);
+        reject('Where did all the dinosaurs go?');
       }
     };
     xhr.open('GET', url, true);
@@ -25,11 +25,14 @@ function getDinos() {
 //UI Logic
 
 function displayDinos(apiResponse) {
-  document.querySelector('#dino-list').innerText = apiResponse;
+  document.querySelector('#dino-list').innerHTML = '';
+  apiResponse = (apiResponse.split('<p>')).toString();
+  apiResponse = (apiResponse.split('</p>')).toString().replaceAll(',', '');
+  document.querySelector('#dino-list').append(apiResponse);
 }
 
-function displayError() {
-  
+function displayError(rejectMessage) {
+  document.querySelector('#dino-list').innerText = rejectMessage;
 }
 
 let img1 = document.querySelector('img');
